@@ -17,8 +17,11 @@ you may be able to use this with an external I2C adapter wired to the laptop's
 battery connector.
 
 Keep in mind that using monitor mode can prevent the EC from handling PD
-interrupts properly, so **make sure** that the IRQ signal for IntEvent1
-is only used by you.
+interrupts properly, so **make sure** nobody else is listening on IRQ1.
+
+For example, ThinkPad T14 Gen1 AMD has I2C1 wired to SoC and I2C2 wired to EC.
+In this case you can clear the IntEvent1 interrupts without causing problems,
+but clearing IntEvent2 breaks a lot of stuff.
 
 TODO: Implement listening on either IntEvent1 or IntEvent2
 
