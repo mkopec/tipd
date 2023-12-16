@@ -1,10 +1,26 @@
 # tipd
 
+## Disclaimer
+
+Only use this tool if you really know what you're doing. Improper configuration
+of the USB-PD controller can result in serious hardware damage.
+
+## What is this
+
 A tool to interact with Texas Instruments USB-PD controllers over i2c.
 
-On machines where the PD controller is wired directly to the SoC's I2C bus, this tool can be used internally - but make sure you unload the driver, if present.
+On machines where the PD controller is wired directly to the SoC's I2C bus, this
+tool can be used internally - but make sure you unload the driver, if present.
 
-If the controller's I2C is not internally accessible (for example wired to EC), you may be able to use this with an external I2C adapter wired to the laptop's battery connector.
+If the controller's I2C is not internally accessible (for example wired to EC),
+you may be able to use this with an external I2C adapter wired to the laptop's
+battery connector.
+
+Keep in mind that using monitor mode can prevent the EC from handling PD
+interrupts properly, so **make sure** that the IRQ signal for IntEvent1
+is only used by you.
+
+TODO: Implement listening on either IntEvent1 or IntEvent2
 
 ## Building
 
@@ -18,9 +34,15 @@ Display helptext:
 
 ```bash
 $ ./tipd -h                                                                                                                                                                                                         main!?
-usage: tipd -b BUS -a ADDR
-	BUS: i2c bus index to use
-	ADDR: address of the TPS slave interface
+Usage: tipd -b BUS -a ADDR -d -m -w [-r, -v, -l]
+	BUS: I2C bus index to use
+	ADDR: Address of the TPS slave interface
+	  -d: Dump all registers
+	  -m: Monitor events
+	  -w: Write register
+	    -r: Register to write
+	    -v: Hexadecimal hexstring of value to write (little endian)
+	    -l: How many bytes to write
 ```
 
 Dumping registers:
