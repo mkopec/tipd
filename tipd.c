@@ -161,9 +161,17 @@ static void write_reg(int file, uint8_t reg, uint8_t *data, uint8_t len) {
 }
 
 static void usage(void) {
-		printf("usage: tipd -b BUS -a ADDR\n");
-		printf("\tBUS: i2c bus index to use\n");
-		printf("\tADDR: address of the TPS slave interface\n");
+		printf("Usage: tipd -b BUS -a ADDR -d -m -w [-r, -v, -l]\n");
+		printf("\tBUS: I2C bus index to use\n");
+		printf("\tADDR: Address of the TPS slave interface\n");
+		printf("\t  -d: Dump all registers\n");
+		printf("\t  -m: Monitor events\n");
+		printf("\t  -w: Write register\n");
+		printf("\t    -r: Register to write\n");
+		printf("\t    -v: Hexadecimal hexstring of value to write (little endian)\n");
+		printf("\t    -l: How many bytes to write\n");
+
+
 }
 
 int main(int argc, char **argv) {
