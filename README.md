@@ -21,9 +21,17 @@ interrupts properly, so **make sure** nobody else is listening on IRQ1.
 
 For example, ThinkPad T14 Gen1 AMD has I2C1 wired to SoC and I2C2 wired to EC.
 In this case you can clear the IntEvent1 interrupts without causing problems,
-but clearing IntEvent2 breaks a lot of stuff.
+but clearing IntEvent2 breaks a lot of stuff, like Alt mode entry or USB
+device discovery, because we clear interrupts before the EC has had the time
+to handle them.
 
-TODO: Implement listening on either IntEvent1 or IntEvent2
+TODO:
+- [ ] Listen on either IntEvent1 or IntEvent2
+	- [ ] Non-intrusive mode that doesn't clear events?
+- [ ] Simplified command sending interface
+- [ ] Add the rest of event definitions from public documentation
+- [ ] Event handling - print PDO when contract established etc.
+- [ ] Messaging over MBWr / MBRd or custom VDMs?
 
 ## Building
 
