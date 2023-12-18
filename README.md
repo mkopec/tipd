@@ -28,6 +28,7 @@ to handle them.
 TODO:
 - [ ] Listen on either IntEvent1 or IntEvent2
 	- [ ] Non-intrusive mode that doesn't clear events?
+ 	- [ ] Use the actual GPIO IRQ to monitor events?
 - [ ] Simplified command sending interface
 - [ ] Add the rest of event definitions from public documentation
 - [ ] Event handling - print PDO when contract established etc.
